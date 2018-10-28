@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.tika:tika-langdetect:1.18">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tika/tika-langdetect/1.18/f318f804c45ac841554491ea5985b8cccc13bf01/tika-langdetect-1.18.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tika/tika-langdetect/1.18/1c2b3c731918a4f8d2433a905c878c70e96ffaef/tika-langdetect-1.18-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

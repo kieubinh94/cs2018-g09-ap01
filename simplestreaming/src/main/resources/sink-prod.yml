@@ -1,0 +1,6 @@
+# rm_search ES
+esHostName: prod-es.ap.cs2018
+esPort: 9300
+esClusterName: qa-es
+esIndex: messages
+esType: m

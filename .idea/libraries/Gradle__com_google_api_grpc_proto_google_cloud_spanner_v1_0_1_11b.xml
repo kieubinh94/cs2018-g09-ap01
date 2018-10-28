@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.api.grpc:proto-google-cloud-spanner-v1:0.1.11b">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-cloud-spanner-v1/0.1.11b/9f4b4a659ce8e0026edddbaf95ce135a90c72af8/proto-google-cloud-spanner-v1-0.1.11b.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-cloud-spanner-v1/0.1.11b/2fbdc8c89bfc0f5c3db8c8e1e556bcd5ca61d293/proto-google-cloud-spanner-v1-0.1.11b-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-cloud-spanner-v1/0.1.11b/35bab9ea9a2bdb75419383671f79f4c877b876d0/proto-google-cloud-spanner-v1-0.1.11b-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "590caf9011b369021b5c0c9d1",
+    "source": "gnip2",
+    "channel": "twitter",
+    "_base": "",
+    "title": "",
+    "content": "HSBC says something",
+    "body": "HSBC says something",
+    "lang": "en",
+    "published_by": {
+      "sns_id": "16932620",
+      "sns_name": "tw",
+      "ne_id": ""
+    },
+    "source_url": ""
+  }
+]

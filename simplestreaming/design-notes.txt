@@ -1,0 +1,70 @@
+MYSQL:
+
+PUBLISHER
+
+publisher_id
+status smallint [2]	1: ACTIVE , 0: INACTIVE
+channel	text: twitter | rss
+partner_id
+display_name
+avatar_url
+country_code
+created_at
+updated_at
+altered_by
+
+NAMED_ENTITY
+
+named_entity_id	integer
+status	smallint [2]	1: ACTIVE , 0: INACTIVE
+name	text
+detail	text NULL
+detail_de	text NULL
+profile_url	text NULL
+avatar_url	text NULL
+country_code	text NULL
+website_url	text NULL
+ceo	text NULL
+headquarter	text NULL
+altered_by
+created_at	timestamp [now()]
+updated_at	timestamp [now()]
+
+
+ELASTICSEARCH: 6.x
+
+Index: messages
+Type: m
+
+{
+   "_index": "messages"
+   "_type": "m",
+   "_id": "5bd3c5a01bd84d006ff1c724",
+   "found": true,
+   "_source": {
+      "channel": "twitter",
+      "created_at": "2018-10-27T01:55:34",
+      "content": "RT @LionHunterMusic: @aravosis Unfortunately for America, you're exactly correct.\n\nThe hatred, racism, misogyny & corruption will only be o…",
+      "updated_at": "2018-10-27T01:55:34.000000",
+      "lang": "en",
+      "published_at": "2018-10-27T01:55:34",
+      "url": "http://twitter.com/LionHunterMusic/status/1056001427242311680",
+      "published_by": {
+         "country_code": US
+         "channel": "tw",
+         "partner_id": "354456001",
+         "avatar_url": "https://pbs.twimg.com/profile_images/3403362250/d353e07ab93715bf6394a4016cbf7cbe_400x400.jpeg",
+         "status": 1
+      },
+      "ne_mentions": [
+         {
+            "country_code": "US",
+            "name": "United States",
+            "id": 72258
+         }
+      ],
+      "is_activated": true,
+      "content_html": "RT <a href=\"https://twitter.com/LionHunterMusic\" rel=\"nofollow\" target=\"_blank\">@LionHunterMusic</a>: <a href=\"https://twitter.com/aravosis\" rel=\"nofollow\" target=\"_blank\">@aravosis</a> Unfortunately for America, you're exactly correct.\n\nThe hatred, racism, misogyny &amp; corruption will only be o…"
+   }
+}
+

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.beam:beam-sdks-java-core:2.4.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.beam/beam-sdks-java-core/2.4.0/74bcc7d1e337fd81772690ae61c9f7cf59dd22ce/beam-sdks-java-core-2.4.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.beam/beam-sdks-java-core/2.4.0/f7b87df638ec38b6fbeb1d08af2df1ddfcaf0b49/beam-sdks-java-core-2.4.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

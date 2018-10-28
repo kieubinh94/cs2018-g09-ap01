@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.stephenc.findbugs:findbugs-annotations:1.3.9-1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.stephenc.findbugs/findbugs-annotations/1.3.9-1/a6b11447635d80757d64b355bed3c00786d86801/findbugs-annotations-1.3.9-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.stephenc.findbugs/findbugs-annotations/1.3.9-1/4daf0b49e72b59ee97e53807d2d6aae412b2d2f9/findbugs-annotations-1.3.9-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.stephenc.findbugs/findbugs-annotations/1.3.9-1/bbcf4719c93a1e8a66f7356ba9f9ffe426a1dd16/findbugs-annotations-1.3.9-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.beam:beam-sdks-java-io-google-cloud-platform:2.4.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.beam/beam-sdks-java-io-google-cloud-platform/2.4.0/c174a7d1f6a826779cb10e8b10b8a84d4f8d62db/beam-sdks-java-io-google-cloud-platform-2.4.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.beam/beam-sdks-java-io-google-cloud-platform/2.4.0/c395f07e0188e364e282353c09c477deaf3f4b9a/beam-sdks-java-io-google-cloud-platform-2.4.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

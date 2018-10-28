@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.tlrx:elasticsearch-test:1.2.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.tlrx/elasticsearch-test/1.2.1/d025ba78c9e261f4188f4f2ebf5fc64f3d96badc/elasticsearch-test-1.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.tlrx/elasticsearch-test/1.2.1/4943f93356944db74a04193ef7129332d9360183/elasticsearch-test-1.2.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.tlrx/elasticsearch-test/1.2.1/93df385ef193c30a7e41bbb2516fc333490ff549/elasticsearch-test-1.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

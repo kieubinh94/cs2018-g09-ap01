@@ -1,0 +1,34 @@
+[
+  {
+    "_id": "590caf9011b369021b5c0c9d2",
+    "source": "gnip2",
+    "channel": "twitter",
+    "_base": "",
+    "title": "",
+    "content": "The shit was smell",
+    "body": "The shit was smell",
+    "lang": "en",
+    "published_by": {
+      "sns_id": "16932620",
+      "sns_name": "tw",
+      "ne_id": ""
+    },
+    "source_url": ""
+  },
+  {
+    "_id": "590caf9011b369021b5c0c9d3",
+    "source": "gnip2",
+    "channel": "twitter",
+    "_base": "",
+    "title": "",
+    "content": "You are bad word and very bad word guys",
+    "body": "You are bad word and very bad word guys",
+    "lang": "en",
+    "published_by": {
+      "sns_id": "16932620",
+      "sns_name": "tw",
+      "ne_id": ""
+    },
+    "source_url": ""
+  }
+]

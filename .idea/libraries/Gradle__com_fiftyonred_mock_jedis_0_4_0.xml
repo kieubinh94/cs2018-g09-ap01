@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.fiftyonred:mock-jedis:0.4.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fiftyonred/mock-jedis/0.4.0/bb1e955aad24d4787265a4fee0ba3a1478438cf3/mock-jedis-0.4.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fiftyonred/mock-jedis/0.4.0/608c85d652afdf36c0af0eb816d66d973f40f00a/mock-jedis-0.4.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fiftyonred/mock-jedis/0.4.0/762f0c87e4b4e87bf0198c2066cd4a3f1443c6f4/mock-jedis-0.4.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

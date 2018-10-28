@@ -1,0 +1,8 @@
+###############################################
+# subscription to read messages
+###############################################
+
+# raw message from crawlers
+twPubsubSubscription: twitter_messages_subscription
+blogPubsubSubscription: blog_messages_subscription
+

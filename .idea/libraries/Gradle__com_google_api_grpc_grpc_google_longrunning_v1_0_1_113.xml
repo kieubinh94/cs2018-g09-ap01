@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.api.grpc:grpc-google-longrunning-v1:0.1.11">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/grpc-google-longrunning-v1/0.1.11/2d0640f3368f9633abebd4fbc5c0f0a57828843f/grpc-google-longrunning-v1-0.1.11.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/grpc-google-longrunning-v1/0.1.11/2f9191acdb9f28193a60735babb93558f96cbc98/grpc-google-longrunning-v1-0.1.11-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/grpc-google-longrunning-v1/0.1.11/b24903c74442bddc1cf4f78e0a700db3166adcc0/grpc-google-longrunning-v1-0.1.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

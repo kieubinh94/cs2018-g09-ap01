@@ -1,0 +1,16 @@
+# DATAFLOW
+runner: DataflowRunner
+streaming: true
+unbounded: true
+jobName: simple-streaming
+
+autoscalingAlgorithm: THROUGHPUT_BASED
+workerDiskType: compute.googleapis.com/projects//zones//diskTypes/pd-ssd
+
+# NETWORK
+zone: europe-west1-b
+subnetwork: regions/europe-west1/subnetworks/europe-west1
+region: europe-west1
+
+numWorkers: 1
+maxNumWorkers: 1

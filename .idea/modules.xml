@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/LTNC.iml" filepath="$PROJECT_DIR$/.idea/LTNC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend-api.iml" filepath="$PROJECT_DIR$/.idea/modules/backend-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend-api_main.iml" group="backend-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/backend-api_test.iml" group="backend-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backendapi.iml" filepath="$PROJECT_DIR$/.idea/modules/backendapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simple-streaming.iml" filepath="$PROJECT_DIR$/.idea/modules/simple-streaming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simple-streaming_main.iml" filepath="$PROJECT_DIR$/.idea/modules/simple-streaming_main.iml" group="simple-streaming" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simple-streaming_test.iml" filepath="$PROJECT_DIR$/.idea/modules/simple-streaming_test.iml" group="simple-streaming" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/twitter-crawler.iml" filepath="$PROJECT_DIR$/.idea/modules/twitter-crawler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/twitter-crawler_main.iml" filepath="$PROJECT_DIR$/.idea/modules/twitter-crawler_main.iml" group="twitter-crawler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/twitter-crawler_test.iml" filepath="$PROJECT_DIR$/.idea/modules/twitter-crawler_test.iml" group="twitter-crawler" />
+    </modules>
+  </component>
+</project>

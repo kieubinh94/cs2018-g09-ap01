@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: io.fastjson:boon:0.34">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.fastjson/boon/0.34/fa10a6c6637ffe87e62f0223d2a64f2b40163ce7/boon-0.34.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.fastjson/boon/0.34/f29f5396f38ee157e3b9c1c4d7a846940faaa754/boon-0.34-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.fastjson/boon/0.34/fd42421c5a0315590513b18301db85d9c8a4ef31/boon-0.34-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
