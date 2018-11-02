@@ -1,0 +1,35 @@
+Configutation:
+  name: Default
+
+  Properties:
+    Property:
+      name: log-path
+      value: "logs"
+
+  Appenders:
+
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "%blue{%d{yyyy-MM-dd HH:mm:ss.SSS}} %highlight{%-5level} %magenta{[%t]} %cyan{%c{1.}}: - %msg%n"
+
+    RollingFile:
+      - name: Info_RollingFile_Appender
+        fileName: ${sys:log-path}/info.log
+        filePattern: "${sys:log-path}/archive/info.log.%d{yyyy-MM-dd-hh-mm}.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %c{1.}: - %msg%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: 20 MB
+
+  Loggers:
+
+      Root:
+        level: ${sys:logging.level}
+        AppenderRef:
+          - ref: Console_Appender
+            level: ${sys:logging.level}
+          - ref: Info_RollingFile_Appender
+            level: ${sys:logging.level}
