@@ -1,7 +1,7 @@
-package cs2018.ap.api.controllers;
+package cs2018.ap.api.controller;
 
 import cs2018.ap.api.dto.Message;
-import cs2018.ap.api.entities.NamedEntity;
+import cs2018.ap.api.entity.NamedEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,7 +13,7 @@ import java.util.List;
 @ResponseBody
 public class AppController {
 
-  @PostMapping("/search-topics")
+  @PostMapping("/companies")
   List<NamedEntity> searchTopics(String name) {
     return new ArrayList<>();
   }

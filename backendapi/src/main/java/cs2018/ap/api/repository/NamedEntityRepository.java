@@ -1,6 +1,6 @@
-package cs2018.ap.api.repositories;
+package cs2018.ap.api.repository;
 
-import cs2018.ap.api.entities.NamedEntity;
+import cs2018.ap.api.entity.NamedEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

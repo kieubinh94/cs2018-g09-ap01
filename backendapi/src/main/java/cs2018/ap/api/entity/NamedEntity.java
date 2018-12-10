@@ -1,4 +1,4 @@
-package cs2018.ap.api.entities;
+package cs2018.ap.api.entity;
 
 import cs2018.ap.api.validation.NotBlank;
 import lombok.Getter;
