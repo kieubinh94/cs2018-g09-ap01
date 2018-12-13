@@ -1,10 +1,11 @@
 package cs2018.ap.streaming.namedentity;
 
 import avro.shaded.com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
+import cs2018.ap.streaming.io.ElasticsearchClient;
+import cs2018.ap.streaming.io.TupleDao;
+import cs2018.ap.streaming.io.Tuple;
 import cs2018.ap.streaming.message.EnrichedMessage;
 import cs2018.ap.streaming.message.NamedEntity;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,35 @@ import org.slf4j.LoggerFactory;
 public class DenormalizeNamedEntityFn extends DoFn<EnrichedMessage, EnrichedMessage> {
   private static final long serialVersionUID = 5262996782113981453L;
   private static final Logger LOG = LoggerFactory.getLogger(DenormalizeNamedEntityFn.class);
-  public static final String REDIS_KEY_TMPL = "namedentity:named_entities:%s";
+
+  private transient TupleDao tupleDao;
+
+  private final String cluster;
+  private final String host;
+  private final int port;
+  private final String index;
+  private final String type;
+
+  public DenormalizeNamedEntityFn(
+      final String cluster,
+      final String host,
+      final int port,
+      final String index,
+      final String type) {
+    this.cluster = cluster;
+    this.host = host;
+    this.port = port;
+    this.index = index;
+    this.type = type;
+  }
+
+  @Setup
+  public void setUp() {
+    LOG.debug("Connecting to {}:{}/{}", host, port, index);
+    this.tupleDao =
+        new TupleDao(
+            ElasticsearchClient.getClient(String.format("%s:%s", host, port), cluster), index);
+  }
 
   @ProcessElement
   public void processElement(final ProcessContext context) {
@@ -28,8 +57,8 @@ public class DenormalizeNamedEntityFn extends DoFn<EnrichedMessage, EnrichedMess
         originalMsg.getPublisher(),
         "Missed publishedBy in relevant message. We need publishedBy to find score_topic for ne_mentions");
 
-    final EnrichedMessage relMsg = new EnrichedMessage(originalMsg);
-    relMsg.setDenormalizedNamedEntities(
+    final EnrichedMessage msg = new EnrichedMessage(originalMsg);
+    msg.setDenormalizedNamedEntities(
         buildDenormalizedNes(
             originalMsg
                 .getDenormalizedNamedEntities()
@@ -37,7 +66,7 @@ public class DenormalizeNamedEntityFn extends DoFn<EnrichedMessage, EnrichedMess
                 .map(NamedEntity::getId)
                 .collect(Collectors.toSet())));
 
-    context.output(relMsg);
+    context.output(msg);
   }
 
   private List<NamedEntity> buildDenormalizedNes(final Set<Integer> tagIds) {
@@ -45,8 +74,17 @@ public class DenormalizeNamedEntityFn extends DoFn<EnrichedMessage, EnrichedMess
       return Collections.emptyList();
     }
 
-    // final List<Integer> neIds = new ArrayList<>(tagIds);
-    final List<NamedEntity> namedEntities = ImmutableList.of();
-    return new ArrayList<>(namedEntities);
+    return tagIds
+        .stream()
+        .map(
+            tagId -> {
+              final Tuple tuple = tupleDao.loadByKey(String.valueOf(tagId), type).get();
+              final NamedEntity topic = new NamedEntity();
+              topic.setId(tagId);
+              topic.setName(tuple.getAsNullableString("name"));
+              topic.setCountryCode(tuple.getAsNullableString("country_code"));
+              return topic;
+            })
+        .collect(Collectors.toList());
   }
 }

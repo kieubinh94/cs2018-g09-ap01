@@ -6,7 +6,6 @@ import cs2018.ap.streaming.message.*;
 import cs2018.ap.streaming.namedentity.*;
 import cs2018.ap.streaming.publisher.DenormalizePublisherFn;
 import cs2018.ap.streaming.publisher.PublisherFilters;
-import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.transforms.Filter;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.slf4j.Logger;
@@ -14,19 +13,18 @@ import org.slf4j.LoggerFactory;
 
 @SuppressWarnings({"PMD.ShortMethodName"})
 public final class EnrichPipelineBuilder
-    extends PipelineBuilder<EnrichedMessage, EnrichedMessage, SimpleStreamingPipeline.OptionsSink> {
+    extends PipelineBuilder<EnrichedMessage, EnrichedMessage, SimpleStreamingPipeline.Options> {
   private static final Logger LOG = LoggerFactory.getLogger(EnrichPipelineBuilder.class);
 
-  public static PipelineBuilder<
-          EnrichedMessage, EnrichedMessage, SimpleStreamingPipeline.OptionsSink>
+  public static PipelineBuilder<EnrichedMessage, EnrichedMessage, SimpleStreamingPipeline.Options>
       of() {
     return new EnrichPipelineBuilder();
   }
 
   @Override
-  public PipelineBuilder<EnrichedMessage, EnrichedMessage, SimpleStreamingPipeline.OptionsSink>
+  public PipelineBuilder<EnrichedMessage, EnrichedMessage, SimpleStreamingPipeline.Options>
       transform(
-          final SimpleStreamingPipeline.OptionsSink pplOptions,
+          final SimpleStreamingPipeline.Options pplOptions,
           final SerializableRedisOptions redisOptions) {
 
     output =
@@ -46,7 +44,14 @@ public final class EnrichPipelineBuilder
                         pplOptions.getPubEsPort(),
                         pplOptions.getPubEsIndex(),
                         pplOptions.getPubEsType())))
-            .apply(ParDo.of(new DenormalizeNamedEntityFn()));
+            .apply(
+                ParDo.of(
+                    new DenormalizeNamedEntityFn(
+                        pplOptions.getTopicEsCluster(),
+                        pplOptions.getTopicEsHost(),
+                        pplOptions.getTopicEsPort(),
+                        pplOptions.getTopicEsIndex(),
+                        pplOptions.getTopicEsType())));
 
     return this;
   }

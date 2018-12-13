@@ -23,17 +23,18 @@ public final class SimpleStreamingPipeline extends StreamingRunOptions {
     main.build(beamOptions).run();
   }
 
-  public Pipeline build(final String[] beamOptions) {
+  private Pipeline build(final String[] beamOptions) {
     final SimplePipeline simplePipeline = new SimplePipeline();
     simplePipeline.build(beamOptions);
     return simplePipeline.getResult();
   }
 
   @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-  public interface OptionsSink
+  public interface Options
       extends PubsubOptions,
           SinkEsOptions,
           PublisherEsOptions,
+          TopicEsOptions,
           RedisOptions,
           DataflowWorkerLoggingOptions,
           DataflowPipelineOptions,

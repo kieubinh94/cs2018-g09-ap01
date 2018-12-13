@@ -18,15 +18,15 @@ import org.slf4j.LoggerFactory;
 
 @SuppressWarnings({"PMD.ShortMethodName"})
 public final class SourcePipelineBuilder
-    extends PipelineBuilder<Void, String, SimpleStreamingPipeline.OptionsSink> {
+    extends PipelineBuilder<Void, String, SimpleStreamingPipeline.Options> {
   private static final Logger LOG = LoggerFactory.getLogger(SourcePipelineBuilder.class);
 
-  public static PipelineBuilder<Void, String, SimpleStreamingPipeline.OptionsSink> of() {
+  public static PipelineBuilder<Void, String, SimpleStreamingPipeline.Options> of() {
     return new SourcePipelineBuilder();
   }
 
   @Override
-  public PipelineBuilder<Void, String, SimpleStreamingPipeline.OptionsSink> loadData(
+  public PipelineBuilder<Void, String, SimpleStreamingPipeline.Options> loadData(
       final Pipeline pipeline, final String readName) {
 
     if (Objects.nonNull(inputFile)) {
@@ -47,8 +47,8 @@ public final class SourcePipelineBuilder
   }
 
   @Override
-  public PipelineBuilder<Void, String, SimpleStreamingPipeline.OptionsSink> transform(
-      final SimpleStreamingPipeline.OptionsSink pplOptions,
+  public PipelineBuilder<Void, String, SimpleStreamingPipeline.Options> transform(
+      final SimpleStreamingPipeline.Options pplOptions,
       final SerializableRedisOptions redisOptions) {
     return this;
   }

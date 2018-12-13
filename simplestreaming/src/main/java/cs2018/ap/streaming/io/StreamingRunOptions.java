@@ -45,6 +45,6 @@ public class StreamingRunOptions implements RunOptions {
 
   @Override
   public List<String> getConfigFiles() {
-    return ImmutableList.of("application.yml", "pubsub.yml", "sink.yml");
+    return ImmutableList.of("application.yml", "pubsub.yml", "es.yml");
   }
 }

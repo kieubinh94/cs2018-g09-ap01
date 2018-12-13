@@ -13,10 +13,10 @@ public class SimplePipeline extends AbstractPipeline<Pipeline> {
   private Pipeline pipeline;
 
   public void build(final String[] options) {
-    final SimpleStreamingPipeline.OptionsSink pplOptions =
+    final SimpleStreamingPipeline.Options pplOptions =
         PipelineOptionsFactory.fromArgs(options)
             .withValidation()
-            .as(SimpleStreamingPipeline.OptionsSink.class);
+            .as(SimpleStreamingPipeline.Options.class);
 
     pipeline = Pipeline.create(pplOptions);
 

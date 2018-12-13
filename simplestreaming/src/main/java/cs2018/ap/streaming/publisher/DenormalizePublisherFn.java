@@ -1,7 +1,11 @@
 package cs2018.ap.streaming.publisher;
 
-import cs2018.ap.streaming.io.PublisherDao;
+import cs2018.ap.streaming.io.ElasticsearchClient;
+import cs2018.ap.streaming.io.TupleDao;
+import cs2018.ap.streaming.io.Tuple;
 import cs2018.ap.streaming.message.EnrichedMessage;
+import cs2018.ap.streaming.message.Publisher;
+import java.util.Optional;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +21,7 @@ public class DenormalizePublisherFn extends DoFn<EnrichedMessage, EnrichedMessag
   private final String index;
   private final String type;
 
-  private transient PublisherDao publisherDao;
+  private transient TupleDao tupleDao;
 
   public DenormalizePublisherFn(
       final String cluster,
@@ -35,20 +39,23 @@ public class DenormalizePublisherFn extends DoFn<EnrichedMessage, EnrichedMessag
   @Setup
   public void setUp() {
     LOG.debug("Connecting to {}:{}/{}", host, port, index);
-    /*publisherDao =
-    new PublisherDao(
-        ElasticsearchClient.getClient(String.format("%s:%s", host, port), cluster), index);*/
+    this.tupleDao =
+        new TupleDao(
+            ElasticsearchClient.getClient(String.format("%s:%s", host, port), cluster), index);
   }
 
   @ProcessElement
   public void processElement(final ProcessContext context) throws IllegalArgumentException {
-    /*final EnrichedMessage enrichedMsg = new EnrichedMessage(context.element());
+    final EnrichedMessage enrichedMsg = new EnrichedMessage(context.element());
     LOG.debug("Start DenormalizePublisherFn with message ID: {}", enrichedMsg.getId());
-    final String key = String.format("%s:%s", enrichedMsg.getPublisher().getChannel(), enrichedMsg.getPublisher().getPartnerId());
+    final String key =
+        String.format(
+            "%s:%s",
+            enrichedMsg.getPublisher().getChannel(), enrichedMsg.getPublisher().getPartnerId());
 
-    final Optional<Tuple> snsAccount = publisherDao.loadByKey(publisherKey, type);
-    if (snsAccount.isPresent()) {
-      RelevantMessageBuilder.PublishedByBuilder.enrichPublishedByFields(enrichedMsg, snsAccount.get());
+    final Optional<Tuple> tuple = tupleDao.loadByKey(key, type);
+    if (tuple.isPresent()) {
+      enrichPublishedByFields(enrichedMsg, tuple.get());
       context.output(enrichedMsg);
       return;
     }
@@ -56,7 +63,17 @@ public class DenormalizePublisherFn extends DoFn<EnrichedMessage, EnrichedMessag
     throw new IllegalStateException(
         String.format(
             "[DROP-MSG] Cannot denormalize publisher with id: %s, key: %s",
-            enrichedMsg.getId(), key));*/
+            enrichedMsg.getId(), key));
+  }
+
+  private void enrichPublishedByFields(final EnrichedMessage relMsg, final Tuple snsAccount) {
+    final Publisher publishedBy = relMsg.getPublisher();
+    publishedBy.setDisplayName(snsAccount.getAsNullableString("display_name"));
+    publishedBy.setScreenName(snsAccount.getAsNullableString("screen_name"));
+    publishedBy.setPartnerId(snsAccount.getAsNullableString("partner_id"));
+    publishedBy.setAvatarUrl(snsAccount.getAsNullableString("avatar_url"));
+    publishedBy.setStatus(snsAccount.getAsNullableInt("status", 0));
+    publishedBy.setCountryCode(snsAccount.getAsNullableString("country_code"));
   }
 
   @Teardown

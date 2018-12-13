@@ -14,10 +14,4 @@ public final class StringConstants {
   public static final char COMMA = ',';
 
   private StringConstants() {}
-
-  public static final class RawMessage {
-    public static final String TITLE_CONTENT_SEP = " ||| ";
-
-    private RawMessage() {}
-  }
 }

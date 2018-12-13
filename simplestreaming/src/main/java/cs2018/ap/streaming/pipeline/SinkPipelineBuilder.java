@@ -14,16 +14,16 @@ import org.slf4j.LoggerFactory;
 
 @SuppressWarnings({"PMD.ShortMethodName"})
 public final class SinkPipelineBuilder
-    extends PipelineBuilder<EnrichedMessage, Void, SimpleStreamingPipeline.OptionsSink> {
+    extends PipelineBuilder<EnrichedMessage, Void, SimpleStreamingPipeline.Options> {
   private static final Logger LOG = LoggerFactory.getLogger(SinkPipelineBuilder.class);
 
-  public static PipelineBuilder<EnrichedMessage, Void, SimpleStreamingPipeline.OptionsSink> of() {
+  public static PipelineBuilder<EnrichedMessage, Void, SimpleStreamingPipeline.Options> of() {
     return new SinkPipelineBuilder();
   }
 
   @Override
-  public PipelineBuilder<EnrichedMessage, Void, SimpleStreamingPipeline.OptionsSink> transform(
-      final SimpleStreamingPipeline.OptionsSink pplOptions,
+  public PipelineBuilder<EnrichedMessage, Void, SimpleStreamingPipeline.Options> transform(
+      final SimpleStreamingPipeline.Options pplOptions,
       final SerializableRedisOptions redisOptions) {
 
     if (Objects.nonNull(outputFile)) {

@@ -1,0 +1,17 @@
+# SINK ES
+esHostName: 10.20.40.20
+esClusterName: qa-int-es
+esIndex: messages
+esType: m
+
+pubEsHost: 10.20.40.20
+pubEsPort: 9300
+pubEsCluster: qa-int-es
+pubEsIndex: publishers
+pubEsType: entity
+
+topicEsHost: 10.20.40.20
+topicEsPort: 9300
+topicEsCluster: qa-int-es
+topicEsIndex: topics
+topicEsType: entity
