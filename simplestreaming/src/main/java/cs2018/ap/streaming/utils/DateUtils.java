@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import org.bson.types.ObjectId;
 import org.joda.time.DateTimeZone;
 
 @SuppressWarnings({"PMD.LongVariable", "PMD.TooManyMethods"})
@@ -88,10 +87,6 @@ public final class DateUtils {
     final long utcDateInMillis =
         DateTimeZone.getDefault().convertLocalToUTC(sourceDate.getTime(), false);
     return new Date(utcDateInMillis);
-  }
-
-  public static Date fromMongoId(final String mongoId) {
-    return new ObjectId(mongoId).getDate();
   }
 
   public static boolean isValidFormat(final String date, final String pattern) {

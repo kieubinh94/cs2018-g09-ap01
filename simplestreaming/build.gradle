@@ -170,12 +170,8 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.2'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.2'
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.6.2'
-    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.0'
     compile group: 'org.jsoup', name: 'jsoup', version: '1.11.2'
     compile group: 'io.fastjson', name: 'boon', version: '0.34'
-    compile group: 'org.apache.tika', name: 'tika-core', version: '1.18'
-    compile group: 'org.apache.tika', name: 'tika-parsers', version: '1.18'
-    compile group: 'org.apache.tika', name: 'tika-langdetect', version: '1.18'
     compile group: "org.elasticsearch", name: "elasticsearch", version: "1.4.4"
     
     // Code gen, annotations
