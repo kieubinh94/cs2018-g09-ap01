@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import cs2018.ap.streaming.SimpleStreamingPipeline;
 import cs2018.ap.streaming.io.*;
 import cs2018.ap.streaming.message.EnrichedMessage;
+import org.apache.beam.runners.dataflow.options.DataflowWorkerLoggingOptions;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.values.PCollection;
@@ -19,6 +20,7 @@ public class SimplePipeline extends AbstractPipeline<Pipeline> {
             .as(SimpleStreamingPipeline.Options.class);
 
     pipeline = Pipeline.create(pplOptions);
+    setLogLevel(pplOptions);
 
     final SerializableRedisOptions redisOptions =
         new SerializableRedisOptions(
@@ -63,5 +65,12 @@ public class SimplePipeline extends AbstractPipeline<Pipeline> {
   @Override
   public Pipeline getResult() {
     return pipeline;
+  }
+
+  private void setLogLevel(final SimpleStreamingPipeline.Options pplOptions) {
+    final String level = pplOptions.getLogLevel();
+    pplOptions.setWorkerLogLevelOverrides(
+        DataflowWorkerLoggingOptions.WorkerLogLevelOverrides.from(
+            ImmutableMap.of("cs2018.ap.streaming", level)));
   }
 }

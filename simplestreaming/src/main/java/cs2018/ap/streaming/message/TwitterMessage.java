@@ -2,7 +2,11 @@ package cs2018.ap.streaming.message;
 
 import cs2018.ap.streaming.io.TwitterDateDeserializer;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
 @SuppressFBWarnings(value = "UWF_UNWRITTEN_FIELD")
@@ -32,16 +36,15 @@ public class TwitterMessage extends RawMessage {
 
   private String text;
 
-  @JsonProperty("twitter_lang")
-  private String twLang;
-
   private String lang;
 
   @JsonProperty(value = "created_at")
-  private String createdAtStr; // bson does not support date deserializer
+  private Date createdAt;
 
   @JsonProperty("id_str")
   private String idStr;
+
+  private User user;
 
   @Override
   public RawMessage cloneMsg() {
@@ -50,15 +53,25 @@ public class TwitterMessage extends RawMessage {
     cloneMsg.source = this.source;
     cloneMsg.text = this.text;
     cloneMsg.lang = this.lang;
-    cloneMsg.twLang = this.twLang;
-    cloneMsg.createdAtStr = this.createdAtStr;
+    cloneMsg.createdAt = this.createdAt;
     cloneMsg.idStr = this.idStr;
     return cloneMsg;
   }
 
   @Override
   public EnrichedMessage toEnrichedMsg() {
-    return null;
+    final EnrichedMessage enrichedMessage = new EnrichedMessage();
+    enrichedMessage.setId(getId());
+    enrichedMessage.setContent(getText());
+    enrichedMessage.setLang(getLang());
+    enrichedMessage.setCreatedAt(getCreatedAt());
+
+    final Publisher publisher = new Publisher();
+    publisher.setPartnerId(getUser().getIdStr());
+    publisher.setChannel("tw");
+    enrichedMessage.setPublisher(publisher);
+
+    return  enrichedMessage;
   }
 
   @Override
@@ -90,20 +103,12 @@ public class TwitterMessage extends RawMessage {
     this.lang = lang;
   }
 
-  public String getTwLang() {
-    return twLang;
+  public Date getCreatedAt() {
+    return createdAt;
   }
 
-  public void setTwLang(final String twLang) {
-    this.twLang = twLang;
-  }
-
-  public String getCreatedAtStr() {
-    return createdAtStr;
-  }
-
-  public void setCreatedAtStr(final String createdAtStr) {
-    this.createdAtStr = createdAtStr;
+  public void setCreatedAt(final Date createdAt) {
+    this.createdAt = createdAt;
   }
 
   public String getIdStr() {
@@ -112,5 +117,74 @@ public class TwitterMessage extends RawMessage {
 
   public void setIdStr(final String idStr) {
     this.idStr = idStr;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public static class User implements Serializable {
+
+    private static final long serialVersionUID = 4596855204041872586L;
+
+    @JsonProperty("id_str")
+    private String idStr;
+
+    private String name;
+
+    @JsonProperty("screen_name")
+    private String screenName;
+
+    @JsonProperty("profile_image_url_https")
+    private String profileImageUrl;
+
+    public User() {
+      super();
+    }
+
+    @Override
+    public String toString() {
+      return String.format("User{idStr='%s'", idStr);
+    }
+
+    public String getIdStr() {
+      return idStr;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public String getScreenName() {
+      return screenName;
+    }
+
+    public String getProfileImageUrl() {
+      return profileImageUrl;
+    }
+
+    @Override
+    public boolean equals(final Object another) {
+      if (this == another) {
+        return true;
+      }
+      if (!(another instanceof User)) {
+        return false;
+      }
+      final User user = (User) another;
+      return Objects.equals(idStr, user.idStr)
+          && Objects.equals(name, user.name)
+          && Objects.equals(screenName, user.screenName)
+          && Objects.equals(profileImageUrl, user.profileImageUrl);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(idStr, name, screenName, profileImageUrl);
+    }
   }
 }

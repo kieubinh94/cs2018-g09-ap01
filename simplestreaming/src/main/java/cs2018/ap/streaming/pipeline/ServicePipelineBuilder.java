@@ -25,7 +25,7 @@ public class ServicePipelineBuilder
             .apply(ParDo.of(new ConvertRawToRelFn()))
             .apply(ParDo.of(new MatchPublisherFn(redisOptions)))
             .apply(ParDo.of(new PreprocessTextFn()))
-            .apply(ParDo.of(new DetectBlacklistFn()))
+            .apply(ParDo.of(new DetectBlacklistFn(redisOptions)))
             .apply(ParDo.of(new DetectNerFn()));
     return this;
   }

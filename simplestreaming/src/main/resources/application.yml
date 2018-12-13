@@ -23,3 +23,5 @@ region: europe-west1
 
 numWorkers: 1
 maxNumWorkers: 1
+
+logLevel: DEBUG
