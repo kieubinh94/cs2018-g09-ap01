@@ -18,6 +18,7 @@ autoscalingAlgorithm: THROUGHPUT_BASED
 # NETWORK
 zone: europe-west1-b
 subnetwork: regions/europe-west1/subnetworks/europe-west1
+workerMachineType: n1-standard-1
 region: europe-west1
 
 numWorkers: 1
