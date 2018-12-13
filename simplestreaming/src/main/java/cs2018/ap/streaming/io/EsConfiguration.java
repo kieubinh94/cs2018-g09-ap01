@@ -4,8 +4,14 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.auto.value.AutoValue;
 import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 import javax.annotation.Nullable;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +29,15 @@ public abstract class EsConfiguration implements Serializable {
       final String index,
       final String type) {
     return create(hostName, port, clusterName, index, type, false);
+  }
+
+  TransportClient createClient() throws UnknownHostException {
+    LOG.debug("Connecting to: {}:{}/{}", getHostName(), getPort(), getIndex());
+    final Settings settings =
+        ImmutableSettings.settingsBuilder().put("cluster.name", getClusterName()).build();
+    return new TransportClient(settings)
+        .addTransportAddress(
+            new InetSocketTransportAddress(InetAddress.getByName(getHostName()), getPort()));
   }
 
   /**

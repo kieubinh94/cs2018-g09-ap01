@@ -6,6 +6,7 @@ import cs2018.ap.streaming.message.*;
 import cs2018.ap.streaming.namedentity.*;
 import cs2018.ap.streaming.publisher.DenormalizePublisherFn;
 import cs2018.ap.streaming.publisher.PublisherFilters;
+import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.transforms.Filter;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.slf4j.Logger;

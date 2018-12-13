@@ -1,10 +1,7 @@
 package cs2018.ap.streaming.io;
 
 import com.beust.jcommander.JCommander;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
 import cs2018.ap.streaming.utils.PropertiesUtils;
-import cs2018.ap.streaming.utils.StringConstants;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,24 +23,8 @@ public abstract class BeamOptionsBuilder<R extends RunOptions> {
   Map<String, Object> loadYml(final String[] mainArgs, final R runOptions) throws IOException {
     JCommander.newBuilder().addObject(runOptions).build().parse(mainArgs);
 
-    Preconditions.checkArgument(
-        "qa".equalsIgnoreCase(runOptions.getEnv()) || "prod".equalsIgnoreCase(runOptions.getEnv()),
-        String.format(
-            "Wrong environment '%s', please try with [%s]", runOptions.getEnv(), "[qa|prod]"));
-
-    final List<String> configPaths = new ArrayList<>(runOptions.getCommonConfigFiles());
-
-    final Map<String, String> envConfigFileMap = runOptions.getEnvConfigFileMap();
-    envConfigFileMap.forEach(
-        (prefix, env) -> configPaths.add(String.format("%s-%s.yml", prefix, env)));
-
-    configPaths.addAll(getExtraFiles(runOptions));
-
+    final List<String> configPaths = new ArrayList<>(runOptions.getConfigFiles());
     return PropertiesUtils.loadResourceConfig(configPaths);
-  }
-
-  List<String> getExtraFiles(final R runOptions) {
-    return ImmutableList.of();
   }
 
   String addJobIdentifier(final Map<String, Object> options, final R runOptions) {
@@ -54,12 +35,7 @@ public abstract class BeamOptionsBuilder<R extends RunOptions> {
     if (StringUtils.isNotBlank(runOptions.getJobName())) {
       jobName = runOptions.getJobName();
     } else {
-      final String prefixJobName = options.get(JOB_NAME).toString();
-      jobName = prefixJobName;
-      if (!StringUtils.isEmpty(runOptions.getUser())) {
-        final String dfVersion = StringUtils.replaceAll(version, "\\.", StringConstants.HYPHEN);
-        jobName = String.format("%s-%s-%s", prefixJobName, runOptions.getUser(), dfVersion);
-      }
+      jobName = options.get(JOB_NAME).toString();
       LOG.debug("Job name is {}", jobName);
       options.put(JOB_NAME, jobName);
     }

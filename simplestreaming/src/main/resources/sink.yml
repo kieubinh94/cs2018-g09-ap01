@@ -1,0 +1,5 @@
+# rm_search ES
+esHostName: 10.20.40.20
+esClusterName: qa-int-es
+esIndex: messages
+esType: m

@@ -45,7 +45,6 @@ public class SimplePipeline extends AbstractPipeline<Pipeline> {
     final PCollection<EnrichedMessage> enrichedMessages =
         EnrichPipelineBuilder.of()
             .setSource(sentimentMessages)
-            .loadData(pipeline, "READ SENTIMENT MSG")
             .transform(pplOptions, redisOptions)
             .getOutput();
 
@@ -58,7 +57,6 @@ public class SimplePipeline extends AbstractPipeline<Pipeline> {
                 pplOptions.getEsClusterName(),
                 pplOptions.getEsIndex(),
                 pplOptions.getEsType()))
-        .loadData(pipeline, "READ ENRICHED MSGS")
         .transform(pplOptions, redisOptions);
   }
 

@@ -173,11 +173,11 @@ dependencies {
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.0'
     compile group: 'org.jsoup', name: 'jsoup', version: '1.11.2'
     compile group: 'io.fastjson', name: 'boon', version: '0.34'
-    compile group: 'org.elasticsearch.client', name: 'rest', version: '5.5.3'
     compile group: 'org.apache.tika', name: 'tika-core', version: '1.18'
     compile group: 'org.apache.tika', name: 'tika-parsers', version: '1.18'
     compile group: 'org.apache.tika', name: 'tika-langdetect', version: '1.18'
-
+    compile group: "org.elasticsearch", name: "elasticsearch", version: "1.4.4"
+    
     // Code gen, annotations
     compileOnly group: 'com.google.auto.value', name: 'auto-value', version: '1.5'
     apt group: 'com.google.auto.value', name: 'auto-value', version: '1.5'

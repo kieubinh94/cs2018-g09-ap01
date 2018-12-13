@@ -1,3 +1,12 @@
+# GCLOUD CONFIGURATION
+project: sentifi-backoffice-qa
+network: sentifi-backoffice-qa-network
+diskSizeGb: 50
+
+redisHost: 10.20.40.41
+redisPort: 6379
+redisMaxConnect: 10000
+
 # DATAFLOW
 runner: DataflowRunner
 streaming: true
@@ -5,7 +14,6 @@ unbounded: true
 jobName: simple-streaming
 
 autoscalingAlgorithm: THROUGHPUT_BASED
-workerDiskType: compute.googleapis.com/projects//zones//diskTypes/pd-ssd
 
 # NETWORK
 zone: europe-west1-b

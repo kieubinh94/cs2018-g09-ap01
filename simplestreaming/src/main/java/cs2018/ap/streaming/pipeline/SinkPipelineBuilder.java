@@ -1,6 +1,7 @@
 package cs2018.ap.streaming.pipeline;
 
 import cs2018.ap.streaming.SimpleStreamingPipeline;
+import cs2018.ap.streaming.io.EsIO;
 import cs2018.ap.streaming.io.SerializableRedisOptions;
 import cs2018.ap.streaming.io.ToRelJsonFn;
 import cs2018.ap.streaming.message.EnrichedMessage;
@@ -29,9 +30,9 @@ public final class SinkPipelineBuilder
       input.apply(ParDo.of(new ToRelJsonFn())).apply(TextIO.write().to(outputFile));
     }
     if (Objects.nonNull(esConf)) {
-      input.apply("TO-ES-DOC", ParDo.of(new ToEsRelDocFn()))
-      /*.apply(
-      String.format("SINK: %s", esConf.getIndex()), EsIO.write().withConfig(esConf))*/ ;
+      input
+          .apply("TO-ES-DOC", ParDo.of(new ToEsRelDocFn()))
+          .apply(String.format("SINK: %s", esConf.getIndex()), EsIO.write().withConfig(esConf));
     }
     return this;
   }

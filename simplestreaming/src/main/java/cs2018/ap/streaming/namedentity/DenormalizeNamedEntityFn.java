@@ -34,7 +34,7 @@ public class DenormalizeNamedEntityFn extends DoFn<EnrichedMessage, EnrichedMess
             originalMsg
                 .getDenormalizedNamedEntities()
                 .stream()
-                .map(item -> item.getId())
+                .map(NamedEntity::getId)
                 .collect(Collectors.toSet())));
 
     context.output(relMsg);
