@@ -1,6 +1,7 @@
 package cs2018.ap.streaming.pipeline;
 
 import cs2018.ap.streaming.message.NamedEntity;
+import cs2018.ap.streaming.message.Publisher;
 import cs2018.ap.streaming.utils.JacksonConverter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,8 +13,14 @@ public class SqlDataExtractor {
     List<String> lines =
         Files.readAllLines(Paths.get("simplestreaming/src/test/resources/expected-msgs.json"));
 
+    createPublishers(lines);
+    // createTopics(lines);
+  }
+
+  private static void createPublishers(List<String> lines)
+      throws IOException {
     Set<String> publishers = new HashSet<>();
-    /*for (String line : lines) {
+    for (String line : lines) {
       final Map<String, Object> data = JacksonConverter.INSTANCE.parseJsonToObject(line, Map.class);
       Map<String, Object> publisher = (Map<String, Object>) data.get("published_by");
       if (!publishers.contains(publisher.get("sns_id").toString())) {
@@ -28,13 +35,20 @@ public class SqlDataExtractor {
           pub.setScreenName("screen_name");
 
           System.out.println(
-              String.format("{\"index\":{\"_id\":\"%s\"}} %n%s", id, JacksonConverter.INSTANCE.writeObjectToJson(pub.toMap()))
-          );
+              String.format(
+                  "INSERT INTO publisher(id, country_code, partner_id, avatar_url) VALUES (%s, '%s', '%s', '%s');",
+                  id,
+                  pub.getCountryCode(),
+                  pub.getPartnerId(),
+                  pub.getAvatarUrl()
+              ));
         }
         publishers.add(publisher.get("sns_id").toString());
       }
-    }*/
+    }
+  }
 
+  private static void createTopics(List<String> lines) throws IOException {
     Set<String> topics = new HashSet<>();
     for (String line : lines) {
       final Map<String, Object> data = JacksonConverter.INSTANCE.parseJsonToObject(line, Map.class);
@@ -42,24 +56,29 @@ public class SqlDataExtractor {
       for (Map<String, Object> topic : neMentions) {
         String id = topic.get("id").toString();
 
-        NamedEntity entity = new NamedEntity();
-        if (topic.get("country_code") != null) {
-          List<String> paths = (List<String>) topic.get("category_name_paths");
-          if (Objects.nonNull(paths)
-              && paths.size() >= 3
-              && paths.get(2).equalsIgnoreCase("Company")) {
-            entity.setCountryCode(topic.get("country_code").toString());
-            entity.setType(NamedEntity.COMPANY);
-            entity.setName(topic.get("name").toString());
-            entity.setId(Integer.parseInt(topic.get("id").toString()));
+        if (!topics.contains(id)) {
+          NamedEntity entity = new NamedEntity();
+          if (topic.get("country_code") != null) {
+            List<String> paths = (List<String>) topic.get("category_name_paths");
+            if (Objects.nonNull(paths)
+                && paths.size() >= 3
+                && paths.get(2).equalsIgnoreCase("Company")) {
+              entity.setCountryCode(topic.get("country_code").toString());
+              entity.setType(NamedEntity.COMPANY);
+              entity.setName(topic.get("name").toString());
+              entity.setId(Integer.parseInt(topic.get("id").toString()));
 
-            System.out.println(
-                String.format(
-                    "{\"index\":{\"_id\":\"%s\"}} %n%s",
-                    id, JacksonConverter.INSTANCE.writeObjectToJson(entity.toMap())));
+              System.out.println(
+                  String.format(
+                      "INSERT INTO named_entity(id, country_code, name, type) VALUES (%s, '%s', '%s', 1);",
+                      id,
+                      entity.getCountryCode(),
+                      entity.getName()
+                      ));
+            }
           }
+          topics.add(id);
         }
-        topics.add(id);
       }
     }
   }

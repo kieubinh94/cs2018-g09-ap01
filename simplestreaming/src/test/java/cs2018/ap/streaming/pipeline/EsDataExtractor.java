@@ -13,13 +13,13 @@ public class EsDataExtractor {
     List<String> lines =
         Files.readAllLines(Paths.get("simplestreaming/src/test/resources/expected-msgs.json"));
 
-    Set<String> publishers = new HashSet<>();
-    createPublishers(lines, publishers);
+    createPublishers(lines);
     createTopics(lines);
   }
 
-  private static void createPublishers(List<String> lines, Set<String> publishers)
+  private static void createPublishers(List<String> lines)
       throws IOException {
+    Set<String> publishers = new HashSet<>();
     for (String line : lines) {
       final Map<String, Object> data = JacksonConverter.INSTANCE.parseJsonToObject(line, Map.class);
       Map<String, Object> publisher = (Map<String, Object>) data.get("published_by");
