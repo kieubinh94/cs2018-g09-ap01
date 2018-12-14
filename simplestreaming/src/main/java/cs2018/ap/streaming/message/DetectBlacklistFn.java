@@ -39,14 +39,11 @@ public class DetectBlacklistFn extends DoFn<EnrichedMessage, EnrichedMessage> {
     final EnrichedMessage relMsg = context.element();
 
     LOG.debug("Start DetectBlacklistFn with message id: {}", relMsg.getId());
-    if (!relMsg.getPublisher().isPublisher()) {
-      return;
+    if(containBlacklistKw(Arrays.asList(relMsg.getContent().split(" ")))) {
+      LOG.debug("[DROP-MSG] contains blacklist");
+    } else {
+      context.output(relMsg);
     }
-
-    final boolean hasBadMessage = containBlacklistKw(Arrays.asList(relMsg.getContent().split(" ")));
-    relMsg.setContainBblWord(hasBadMessage);
-
-    context.output(relMsg);
   }
 
   private boolean containBlacklistKw(final List<String> ngrams) {

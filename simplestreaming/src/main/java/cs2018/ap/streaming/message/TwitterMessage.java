@@ -63,11 +63,17 @@ public class TwitterMessage extends RawMessage {
     enrichedMessage.setId(getId());
     enrichedMessage.setContent(getText());
     enrichedMessage.setLang(getLang());
+    enrichedMessage.setChannel("tw");
+    enrichedMessage.setSourceUrl(
+        String.format(
+            "http://twitter.com/%s/status/%s", this.getUser().getScreenName(), this.getIdStr()));
+    enrichedMessage.setSource(getSource());
     enrichedMessage.setCreatedAt(TwitterDateDeserializer.INSTANCE.parse(getCreatedAtStr()));
 
     final Publisher publisher = new Publisher();
     publisher.setPartnerId(getUser().getIdStr());
     publisher.setChannel("tw");
+    publisher.setScreenName(this.getUser().getScreenName());
     enrichedMessage.setPublisher(publisher);
 
     return enrichedMessage;

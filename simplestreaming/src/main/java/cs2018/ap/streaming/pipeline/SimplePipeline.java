@@ -38,20 +38,20 @@ public class SimplePipeline extends AbstractPipeline<Pipeline> {
             .loadData(pipeline, Strings.EMPTY)
             .getOutput();
 
-    final PCollection<EnrichedMessage> sentimentMessages =
+    final PCollection<EnrichedMessage> nerMsgs =
         ServicePipelineBuilder.of()
             .setSource(rawMessages)
             .transform(pplOptions, redisOptions)
             .getOutput();
 
-    final PCollection<EnrichedMessage> enrichedMessages =
+    final PCollection<EnrichedMessage> finalMsgs =
         EnrichPipelineBuilder.of()
-            .setSource(sentimentMessages)
+            .setSource(nerMsgs)
             .transform(pplOptions, redisOptions)
             .getOutput();
 
     SinkPipelineBuilder.of()
-        .setSource(enrichedMessages)
+        .setSource(finalMsgs)
         .setDestination(
             EsConfiguration.create(
                 pplOptions.getEsHostName(),

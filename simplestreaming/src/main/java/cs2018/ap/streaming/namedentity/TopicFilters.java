@@ -9,7 +9,7 @@ public enum TopicFilters implements SerializableFunction<EnrichedMessage, Boolea
   NOT_EMPTY_NAMED_ENTITY {
     @Override
     public Boolean apply(final EnrichedMessage relMsg) {
-      final boolean condition = CollectionUtils.isNotEmpty(relMsg.getDenormalizedNamedEntities());
+      final boolean condition = CollectionUtils.isNotEmpty(relMsg.getTopicIds());
       if (!condition) {
         LoggerFactory.getLogger(TopicFilters.class)
             .debug("[DROP-MSG] Named Entity not found with message id: {}", relMsg.getId());

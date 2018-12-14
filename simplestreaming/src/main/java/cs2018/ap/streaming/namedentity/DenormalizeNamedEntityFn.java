@@ -53,10 +53,6 @@ public class DenormalizeNamedEntityFn extends DoFn<EnrichedMessage, EnrichedMess
     final EnrichedMessage originalMsg = context.element();
     LOG.debug("Start DenormalizeNamedEntityFn with message ID: {}", originalMsg.getId());
 
-    Preconditions.checkNotNull(
-        originalMsg.getPublisher(),
-        "Missed publishedBy in relevant message. We need publishedBy to find score_topic for ne_mentions");
-
     final EnrichedMessage msg = new EnrichedMessage(originalMsg);
     msg.setDenormalizedNamedEntities(
         buildDenormalizedNes(

@@ -30,9 +30,6 @@ public final class EnrichPipelineBuilder
     output =
         input
             .apply(
-                parDoNameOf("FilterUnknownPublisherFn"),
-                Filter.by(PublisherFilters.NOT_EMPTY_PUBLISHER))
-            .apply(
                 parDoNameOf("FilterEmptyNamedEntity"),
                 Filter.by(TopicFilters.NOT_EMPTY_NAMED_ENTITY))
             .apply(

@@ -29,9 +29,6 @@ public class EnrichedMessage implements Serializable {
   private String content;
   private String lang;
 
-  @JsonProperty("content_html")
-  private String htmlContent;
-
   @JsonProperty("created_at")
   private Date createdAt;
 
@@ -44,8 +41,8 @@ public class EnrichedMessage implements Serializable {
   @JsonProperty("published_by")
   private Publisher publisher;
 
-  @JsonProperty("contain_bbl_word")
-  private boolean containBblWord;
+  @JsonProperty("topic_ids")
+  private List<Integer> topicIds;
 
   @JsonProperty("ne_mentions")
   private List<NamedEntity> denormalizedNamedEntities = ImmutableList.of();
@@ -62,12 +59,11 @@ public class EnrichedMessage implements Serializable {
     this.channel = other.channel;
     this.sourceUrl = other.sourceUrl;
     this.content = other.content;
-    this.htmlContent = other.htmlContent;
     this.publisher = new Publisher(other.publisher);
-    this.containBblWord = other.containBblWord;
     this.createdAt = other.createdAt;
     this.denormalizedNamedEntities = new ArrayList<>(other.getDenormalizedNamedEntities());
     this.updatedAt = other.updatedAt;
+    this.topicIds = other.topicIds;
     this.publishedAt = other.publishedAt;
   }
 
@@ -82,7 +78,6 @@ public class EnrichedMessage implements Serializable {
     map.put("channel", this.getChannel());
     map.put("source_url", this.getSourceUrl());
     map.put("content", this.getContent());
-    map.put("content_html", this.getHtmlContent());
     if (Objects.nonNull(this.getPublisher())) {
       map.put("published_by", this.getPublisher().toMap());
     }
@@ -153,14 +148,6 @@ public class EnrichedMessage implements Serializable {
     this.content = content;
   }
 
-  public String getHtmlContent() {
-    return htmlContent;
-  }
-
-  public void setHtmlContent(String htmlContent) {
-    this.htmlContent = htmlContent;
-  }
-
   public Date getCreatedAt() {
     return createdAt;
   }
@@ -193,14 +180,6 @@ public class EnrichedMessage implements Serializable {
     this.publisher = publisher;
   }
 
-  public boolean isContainBblWord() {
-    return containBblWord;
-  }
-
-  public void setContainBblWord(boolean containBblWord) {
-    this.containBblWord = containBblWord;
-  }
-
   public List<NamedEntity> getDenormalizedNamedEntities() {
     return denormalizedNamedEntities;
   }
@@ -215,5 +194,13 @@ public class EnrichedMessage implements Serializable {
 
   public void setLang(String lang) {
     this.lang = lang;
+  }
+
+  public List<Integer> getTopicIds() {
+    return topicIds;
+  }
+
+  public void setTopicIds(List<Integer> topicIds) {
+    this.topicIds = topicIds;
   }
 }
