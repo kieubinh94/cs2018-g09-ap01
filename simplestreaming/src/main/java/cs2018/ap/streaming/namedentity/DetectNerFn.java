@@ -23,6 +23,7 @@ public class DetectNerFn extends DoFn<EnrichedMessage, EnrichedMessage> {
 
     final EnrichedMessage relMsg = new EnrichedMessage(originalMsg);
     relMsg.setTopicIds(Collections.singletonList(24495));
+
     context.output(relMsg);
   }
 }
