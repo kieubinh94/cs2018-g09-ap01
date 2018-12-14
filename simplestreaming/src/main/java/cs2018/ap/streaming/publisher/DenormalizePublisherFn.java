@@ -1,8 +1,8 @@
 package cs2018.ap.streaming.publisher;
 
 import cs2018.ap.streaming.io.ElasticsearchClient;
-import cs2018.ap.streaming.io.TupleDao;
 import cs2018.ap.streaming.io.Tuple;
+import cs2018.ap.streaming.io.TupleDao;
 import cs2018.ap.streaming.message.EnrichedMessage;
 import cs2018.ap.streaming.message.Publisher;
 import java.util.Optional;

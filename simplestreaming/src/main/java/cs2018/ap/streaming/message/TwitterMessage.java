@@ -1,12 +1,9 @@
 package cs2018.ap.streaming.message;
 
-import cs2018.ap.streaming.io.TwitterDateDeserializer;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-
 import org.codehaus.jackson.annotate.JsonProperty;
 
 @SuppressFBWarnings(value = "UWF_UNWRITTEN_FIELD")
@@ -39,11 +36,12 @@ public class TwitterMessage extends RawMessage {
   private String lang;
 
   @JsonProperty(value = "created_at")
-  private Date createdAt;
+  private String createdAtStr;
 
   @JsonProperty("id_str")
   private String idStr;
 
+  @JsonProperty("user")
   private User user;
 
   @Override
@@ -53,8 +51,9 @@ public class TwitterMessage extends RawMessage {
     cloneMsg.source = this.source;
     cloneMsg.text = this.text;
     cloneMsg.lang = this.lang;
-    cloneMsg.createdAt = this.createdAt;
+    cloneMsg.createdAtStr = this.createdAtStr;
     cloneMsg.idStr = this.idStr;
+    cloneMsg.user = this.user;
     return cloneMsg;
   }
 
@@ -64,14 +63,16 @@ public class TwitterMessage extends RawMessage {
     enrichedMessage.setId(getId());
     enrichedMessage.setContent(getText());
     enrichedMessage.setLang(getLang());
-    enrichedMessage.setCreatedAt(getCreatedAt());
+    enrichedMessage.setCreatedAt(
+        TwitterDateDeserializer.INSTANCE.parse(getCreatedAtStr())
+    );
 
     final Publisher publisher = new Publisher();
     publisher.setPartnerId(getUser().getIdStr());
     publisher.setChannel("tw");
     enrichedMessage.setPublisher(publisher);
 
-    return  enrichedMessage;
+    return enrichedMessage;
   }
 
   @Override
@@ -103,12 +104,12 @@ public class TwitterMessage extends RawMessage {
     this.lang = lang;
   }
 
-  public Date getCreatedAt() {
-    return createdAt;
+  public String getCreatedAtStr() {
+    return createdAtStr;
   }
 
-  public void setCreatedAt(final Date createdAt) {
-    this.createdAt = createdAt;
+  public void setCreatedAtStr(final String createdAtStr) {
+    this.createdAtStr = createdAtStr;
   }
 
   public String getIdStr() {

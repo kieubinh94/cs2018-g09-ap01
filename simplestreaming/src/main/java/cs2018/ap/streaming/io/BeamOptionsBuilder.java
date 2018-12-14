@@ -56,11 +56,11 @@ public abstract class BeamOptionsBuilder<R extends RunOptions> {
   String[] setUpdateOptIfJobExisted(
       final String[] beamOptions, final String project, final String region, final String jobName)
       throws IOException {
-    if (PipelineUtils.isJobRunning(project, region, jobName)) {
+    /*if (PipelineUtils.isJobRunning(project, region, jobName)) {
       final String[] newOptions = Arrays.copyOf(beamOptions, beamOptions.length + 1);
       newOptions[beamOptions.length] = "--update";
       return newOptions;
-    }
+    }*/
     return beamOptions;
   }
 }

@@ -2,16 +2,15 @@ package cs2018.ap.streaming.message;
 
 import cs2018.ap.streaming.io.RedisConnector;
 import cs2018.ap.streaming.io.SerializableRedisOptions;
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisCommands;
 import redis.clients.jedis.exceptions.JedisConnectionException;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
 
 @SuppressWarnings({"PMD.BeanMembersShouldSerialize"})
 public class DetectBlacklistFn extends DoFn<EnrichedMessage, EnrichedMessage> {
@@ -41,9 +40,6 @@ public class DetectBlacklistFn extends DoFn<EnrichedMessage, EnrichedMessage> {
 
     LOG.debug("Start DetectBlacklistFn with message id: {}", relMsg.getId());
     if (!relMsg.getPublisher().isPublisher()) {
-      // we don't need to detect blacklist in this case
-      // but we still need to output msg for raw token pipeline.
-      context.output(relMsg);
       return;
     }
 
