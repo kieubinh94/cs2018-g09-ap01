@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class DetectNerFn extends DoFn<EnrichedMessage, EnrichedMessage> {
   private static final Logger LOG = LoggerFactory.getLogger(DetectNerFn.class);
@@ -21,7 +22,7 @@ public class DetectNerFn extends DoFn<EnrichedMessage, EnrichedMessage> {
         "Missed publishedBy in enriched message. We need publishedBy to find score_topic for ne_mentions");
 
     final EnrichedMessage relMsg = new EnrichedMessage(originalMsg);
-    relMsg.setTopicIds(Arrays.asList(24495));
+    relMsg.setTopicIds(Collections.singletonList(24495));
     context.output(relMsg);
   }
 }
