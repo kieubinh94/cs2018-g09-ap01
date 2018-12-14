@@ -15,7 +15,7 @@ public class MatchPublisherFn extends DoFn<EnrichedMessage, EnrichedMessage> {
   private static final long serialVersionUID = -4916287707068939413L;
   private static final Logger LOG = LoggerFactory.getLogger(MatchPublisherFn.class);
 
-  public static final String REDIS_NSPACE_PARTNER_ID = "publisher:";
+  public static final String REDIS_NSPACE_PARTNER_ID = "pubs";
 
   private final SerializableRedisOptions redisOptions;
   private transient JedisCommands redis;

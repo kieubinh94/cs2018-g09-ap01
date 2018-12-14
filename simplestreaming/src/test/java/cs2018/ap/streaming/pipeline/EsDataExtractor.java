@@ -17,8 +17,7 @@ public class EsDataExtractor {
     createTopics(lines);
   }
 
-  private static void createPublishers(List<String> lines)
-      throws IOException {
+  private static void createPublishers(List<String> lines) throws IOException {
     Set<String> publishers = new HashSet<>();
     for (String line : lines) {
       final Map<String, Object> data = JacksonConverter.INSTANCE.parseJsonToObject(line, Map.class);

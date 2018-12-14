@@ -17,8 +17,7 @@ public class SqlDataExtractor {
     // createTopics(lines);
   }
 
-  private static void createPublishers(List<String> lines)
-      throws IOException {
+  private static void createPublishers(List<String> lines) throws IOException {
     Set<String> publishers = new HashSet<>();
     for (String line : lines) {
       final Map<String, Object> data = JacksonConverter.INSTANCE.parseJsonToObject(line, Map.class);
@@ -37,11 +36,7 @@ public class SqlDataExtractor {
           System.out.println(
               String.format(
                   "INSERT INTO publisher(id, country_code, partner_id, avatar_url) VALUES (%s, '%s', '%s', '%s');",
-                  id,
-                  pub.getCountryCode(),
-                  pub.getPartnerId(),
-                  pub.getAvatarUrl()
-              ));
+                  id, pub.getCountryCode(), pub.getPartnerId(), pub.getAvatarUrl()));
         }
         publishers.add(publisher.get("sns_id").toString());
       }
@@ -71,10 +66,7 @@ public class SqlDataExtractor {
               System.out.println(
                   String.format(
                       "INSERT INTO named_entity(id, country_code, name, type) VALUES (%s, '%s', '%s', 1);",
-                      id,
-                      entity.getCountryCode(),
-                      entity.getName()
-                      ));
+                      id, entity.getCountryCode(), entity.getName()));
             }
           }
           topics.add(id);
