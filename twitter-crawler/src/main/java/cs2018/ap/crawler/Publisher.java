@@ -9,14 +9,11 @@ import java.util.List;
 
 public class Publisher {
 
-  public static final String PROJECT = "sentifi-backoffice-qa";
-  public static final String TOPIC = "twitter_messages";
-
   public static void main(String[] args) throws IOException {
-    final PubsubClient pubsubClient = new PubsubClient(PROJECT);
-    final TopicName topicName = ProjectTopicName.of(PROJECT, TOPIC);
+    final PubsubClient pubsubClient = new PubsubClient(Constants.PROJECT);
+    final TopicName topicName = ProjectTopicName.of(Constants.PROJECT, Constants.TOPIC);
 
-    List<String> lines = Files.readAllLines(Paths.get("twitter-crawler/src/main/resources/demo-msg.json"));
+    List<String> lines = Files.readAllLines(Paths.get("twitter-crawler/src/main/resources/input-msgs.json"));
     for (String line : lines) {
       System.out.println("Posting: " + line);
       pubsubClient.publishMessage(topicName, line);

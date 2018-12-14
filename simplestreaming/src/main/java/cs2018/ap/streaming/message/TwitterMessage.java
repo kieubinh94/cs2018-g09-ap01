@@ -63,9 +63,7 @@ public class TwitterMessage extends RawMessage {
     enrichedMessage.setId(getId());
     enrichedMessage.setContent(getText());
     enrichedMessage.setLang(getLang());
-    enrichedMessage.setCreatedAt(
-        TwitterDateDeserializer.INSTANCE.parse(getCreatedAtStr())
-    );
+    enrichedMessage.setCreatedAt(TwitterDateDeserializer.INSTANCE.parse(getCreatedAtStr()));
 
     final Publisher publisher = new Publisher();
     publisher.setPartnerId(getUser().getIdStr());

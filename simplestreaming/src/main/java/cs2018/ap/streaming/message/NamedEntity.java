@@ -17,12 +17,17 @@ public class NamedEntity implements Serializable {
 
   private static final long serialVersionUID = -2609917381174027501L;
 
+  public static final int COMPANY = 1;
+
   private int id;
+  private int type;
 
   private String name;
 
   @JsonProperty("country_code")
   private String countryCode;
+
+  private String description;
 
   public NamedEntity() {
     super();
@@ -58,11 +63,27 @@ public class NamedEntity implements Serializable {
     this.name = name;
   }
 
+  public int getType() {
+    return type;
+  }
+
+  public void setType(int type) {
+    this.type = type;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
   public Map<String, Object> toMap() {
     final Map<String, Object> map = new HashMap<>();
-    map.put("country_code", this.countryCode);
     map.put("id", this.id);
     map.put("name", this.name);
+    map.put("country_code", this.countryCode);
     return map;
   }
 }

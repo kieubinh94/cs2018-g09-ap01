@@ -2,6 +2,7 @@ package cs2018.ap.streaming.pipeline;
 
 import cs2018.ap.streaming.SimpleStreamingPipeline;
 import cs2018.ap.streaming.io.SerializableRedisOptions;
+import cs2018.ap.streaming.lang.DetectLanguageFn;
 import cs2018.ap.streaming.message.*;
 import cs2018.ap.streaming.namedentity.DetectNerFn;
 import cs2018.ap.streaming.publisher.MatchPublisherFn;
@@ -23,6 +24,7 @@ public class ServicePipelineBuilder
         input
             .apply(ParDo.of(new ReadJsonToRawMessageFn()))
             .apply(ParDo.of(new ConvertRawToRelFn()))
+            .apply(ParDo.of(new DetectLanguageFn()))
             .apply(ParDo.of(new MatchPublisherFn(redisOptions)))
             .apply(ParDo.of(new PreprocessTextFn()))
             .apply(ParDo.of(new DetectBlacklistFn(redisOptions)))

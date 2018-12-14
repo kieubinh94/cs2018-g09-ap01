@@ -15,8 +15,6 @@ import org.codehaus.jackson.annotate.JsonProperty;
 })
 public class Publisher implements Serializable {
 
-  public static final Publisher TRUE = new Publisher();
-
   private static final long serialVersionUID = -2609917381174027500L;
 
   @JsonProperty("channel")
@@ -209,7 +207,6 @@ public class Publisher implements Serializable {
     final Map<String, Object> map = new HashMap<>();
     map.put("channel", this.getChannel());
     map.put("partner_id", this.getPartnerId());
-    map.put("status", this.getStatus());
     map.put("avatar_url", this.getAvatarUrl());
     map.put("country_code", this.getCountryCode());
     return map;

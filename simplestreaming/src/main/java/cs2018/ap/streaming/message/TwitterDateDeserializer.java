@@ -1,6 +1,6 @@
 package cs2018.ap.streaming.message;
-import cs2018.ap.streaming.utils.DateUtils;
 
+import cs2018.ap.streaming.utils.DateUtils;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;

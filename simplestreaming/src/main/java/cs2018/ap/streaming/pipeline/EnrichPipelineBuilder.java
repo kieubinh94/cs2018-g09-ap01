@@ -32,7 +32,6 @@ public final class EnrichPipelineBuilder
             .apply(
                 parDoNameOf("FilterUnknownPublisherFn"),
                 Filter.by(PublisherFilters.NOT_EMPTY_PUBLISHER))
-            .apply(parDoNameOf("FilterBlacklistFn"), Filter.by(MessageFilters.NOT_BLACKLIST))
             .apply(
                 parDoNameOf("FilterEmptyNamedEntity"),
                 Filter.by(TopicFilters.NOT_EMPTY_NAMED_ENTITY))
