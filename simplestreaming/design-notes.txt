@@ -1,37 +1,33 @@
 MYSQL:
 
 PUBLISHER
-
-publisher_id
-status smallint [2]	1: ACTIVE , 0: INACTIVE
+---------------------------
+id
 channel	text: twitter | rss
 partner_id
 display_name
 avatar_url
 country_code
-created_at
-updated_at
-altered_by
+created_at timestamp [now()]
+updated_at timestamp [now()]
 
 NAMED_ENTITY
-
-named_entity_id	integer
-status	smallint [2]	1: ACTIVE , 0: INACTIVE
-name	text
-detail	text NULL
-detail_de	text NULL
-profile_url	text NULL
-avatar_url	text NULL
+---------------------------
+id	          integer
+name	        text
 country_code	text NULL
-website_url	text NULL
-ceo	text NULL
-headquarter	text NULL
+description   text NULL
 altered_by
 created_at	timestamp [now()]
 updated_at	timestamp [now()]
 
+KEYWORD
+---------------------------
+id	             integer
+text	           text
+named_entity_id	 integer
 
-ELASTICSEARCH: 6.x
+ELASTICSEARCH: 1.x
 
 Index: messages
 Type: m
