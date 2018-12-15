@@ -2,6 +2,7 @@ package cs2018.ap.streaming.pipeline;
 
 import cs2018.ap.streaming.message.NamedEntity;
 import cs2018.ap.streaming.message.Publisher;
+import cs2018.ap.streaming.namedentity.DetectNerFn;
 import cs2018.ap.streaming.utils.JacksonConverter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,9 +12,9 @@ import java.util.*;
 public class SqlDataExtractor {
   public static void main(final String[] args) throws IOException {
     List<String> lines =
-        Files.readAllLines(Paths.get("simplestreaming/src/test/resources/expected-msgs.json"));
+        Files.readAllLines(Paths.get("src/test/resources/expected-msgs.json"));
 
-    createPublishers(lines);
+    createKeyword(lines);
     // createTopics(lines);
   }
 
@@ -35,7 +36,7 @@ public class SqlDataExtractor {
 
           System.out.println(
               String.format(
-                  "INSERT INTO publisher(id, country_code, partner_id, avatar_url) VALUES (%s, '%s', '%s', '%s');",
+                  "INSERT INTO publisher(publisher_id, country_code, partner_id, avatar_url) VALUES (%s, '%s', '%s', '%s');",
                   id, pub.getCountryCode(), pub.getPartnerId(), pub.getAvatarUrl()));
         }
         publishers.add(publisher.get("sns_id").toString());
@@ -65,7 +66,7 @@ public class SqlDataExtractor {
 
               System.out.println(
                   String.format(
-                      "INSERT INTO named_entity(id, country_code, name, type) VALUES (%s, '%s', '%s', 1);",
+                      "INSERT INTO named_entity(named_entity_id, country_code, name, type) VALUES (%s, '%s', '%s', 1);",
                       id, entity.getCountryCode(), entity.getName()));
             }
           }
@@ -92,7 +93,19 @@ public class SqlDataExtractor {
               String name = topic.get("name").toString();
               System.out.println(
                   String.format(
-                      "INSERT INTO keyword(text, named_entity_id) VALUES ('%s', %s);", name, id));
+                      "INSERT INTO keyword(text, named_entity_id) VALUES ('%s', %s);", name.toLowerCase(Locale.ENGLISH), id));
+
+              String stripName =
+                  name.replace(" Inc", "")
+                      .replace(" Corp", "")
+                      .replace(" LLC", "")
+                      .replace(" Ltd", "")
+                      .trim();
+              if (!stripName.equalsIgnoreCase(name)) {
+                System.out.println(
+                    String.format(
+                        "INSERT INTO keyword(text, named_entity_id) VALUES ('%s', %s);", stripName.toLowerCase(Locale.ENGLISH), id));
+              }
             }
           }
           topics.add(id);
