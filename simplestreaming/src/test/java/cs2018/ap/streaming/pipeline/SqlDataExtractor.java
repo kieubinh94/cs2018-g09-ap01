@@ -74,4 +74,30 @@ public class SqlDataExtractor {
       }
     }
   }
+
+  private static void createKeyword(List<String> lines) throws IOException {
+    Set<String> topics = new HashSet<>();
+    for (String line : lines) {
+      final Map<String, Object> data = JacksonConverter.INSTANCE.parseJsonToObject(line, Map.class);
+      List<Map<String, Object>> neMentions = (List<Map<String, Object>>) data.get("ne_mentions");
+      for (Map<String, Object> topic : neMentions) {
+        String id = topic.get("id").toString();
+
+        if (!topics.contains(id)) {
+          if (topic.get("country_code") != null) {
+            List<String> paths = (List<String>) topic.get("category_name_paths");
+            if (Objects.nonNull(paths)
+                && paths.size() >= 3
+                && paths.get(2).equalsIgnoreCase("Company")) {
+              String name = topic.get("name").toString();
+              System.out.println(
+                  String.format(
+                      "INSERT INTO keyword(text, named_entity_id) VALUES ('%s', %s);", name, id));
+            }
+          }
+          topics.add(id);
+        }
+      }
+    }
+  }
 }

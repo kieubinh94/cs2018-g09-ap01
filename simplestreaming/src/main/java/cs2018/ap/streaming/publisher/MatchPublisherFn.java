@@ -38,7 +38,7 @@ public class MatchPublisherFn extends DoFn<EnrichedMessage, EnrichedMessage> {
     final String key = String.format("%s:%s", publisher.getChannel(), publisher.getPartnerId());
     final String publisherId = findPartnerId(key);
 
-    if(Objects.nonNull(publisherId)) {
+    if (Objects.nonNull(publisherId)) {
       context.output(relMsg);
     } else {
       LOG.debug("[DROP-MSG] Publisher not found");

@@ -48,7 +48,8 @@ public class DenormalizePublisherFn extends DoFn<EnrichedMessage, EnrichedMessag
   public void processElement(final ProcessContext context) throws IllegalArgumentException {
     final EnrichedMessage enrichedMsg = new EnrichedMessage(context.element());
     LOG.debug("Start DenormalizePublisherFn with message ID: {}", enrichedMsg.getId());
-    final Optional<Tuple> tuple = tupleDao.loadByKey(enrichedMsg.getPublisher().getPartnerId(), type);
+    final Optional<Tuple> tuple =
+        tupleDao.loadByKey(enrichedMsg.getPublisher().getPartnerId(), type);
     if (tuple.isPresent()) {
       enrichPublishedByFields(enrichedMsg, tuple.get());
       context.output(enrichedMsg);

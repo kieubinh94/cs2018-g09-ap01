@@ -1,6 +1,5 @@
 package cs2018.ap.streaming.namedentity;
 
-import avro.shaded.com.google.common.base.Preconditions;
 import cs2018.ap.streaming.io.ElasticsearchClient;
 import cs2018.ap.streaming.io.Tuple;
 import cs2018.ap.streaming.io.TupleDao;

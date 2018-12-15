@@ -2,15 +2,15 @@ package cs2018.ap.streaming.namedentity;
 
 import avro.shaded.com.google.common.base.Preconditions;
 import cs2018.ap.streaming.message.EnrichedMessage;
+import java.util.Collections;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 public class DetectNerFn extends DoFn<EnrichedMessage, EnrichedMessage> {
   private static final Logger LOG = LoggerFactory.getLogger(DetectNerFn.class);
+
+  public static final String REDIS_NSPACE_KEYWORD = "keywords";
 
   @ProcessElement
   public void processElement(final ProcessContext context) {
