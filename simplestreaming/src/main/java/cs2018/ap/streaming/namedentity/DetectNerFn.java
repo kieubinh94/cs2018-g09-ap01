@@ -51,8 +51,8 @@ public class DetectNerFn extends DoFn<EnrichedMessage, EnrichedMessage> {
         redis.mget(
             ngrams
                 .stream()
-                .map(ngram -> String.format("%s:%s", REDIS_NSPACE_KEYWORD, ngram))
-                .collect(Collectors.joining()));
+                .map(ngram -> String.format("%s:%s", REDIS_NSPACE_KEYWORD, ngram).toLowerCase(Locale.ENGLISH))
+                .toArray(String[]::new));
     for (String topic : values) {
       if (Objects.nonNull(topic)) {
         topicIds.add(Integer.parseInt(topic));
