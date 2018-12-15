@@ -59,8 +59,27 @@ public class RedisImporter {
                 && paths.size() >= 3
                 && paths.get(2).equalsIgnoreCase("Company")) {
               String name = topic.get("name").toString();
-              System.out.println("Setting " + id);
-              redis.hset(DetectNerFn.REDIS_NSPACE_KEYWORD, name, id);
+
+              System.out.println(String.format("Setting %s - %s", id, name));
+              redis.set(
+                  String.format(
+                      "%s:%s", DetectNerFn.REDIS_NSPACE_KEYWORD, name.toLowerCase(Locale.ENGLISH)),
+                  id);
+
+              String stripName =
+                  name.replace(" Inc", "")
+                      .replace(" Corp", "")
+                      .replace(" LLC", "")
+                      .replace(" Ltd", "")
+                      .trim();
+              if (!stripName.equalsIgnoreCase(name)) {
+                System.out.println(String.format("Setting %s - %s", id, stripName));
+                redis.set(
+                    String.format(
+                        "%s:%s",
+                        DetectNerFn.REDIS_NSPACE_KEYWORD, stripName.toLowerCase(Locale.ENGLISH)),
+                    id);
+              }
             }
           }
           topics.add(id);
