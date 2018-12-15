@@ -22,6 +22,11 @@ public class DetectNerFn extends DoFn<EnrichedMessage, EnrichedMessage> {
     this.redisOptions = redisOptions;
   }
 
+  @Setup
+  public void setUp() {
+    this.redis = RedisConnector.getInstance(redisOptions);
+  }
+
   @ProcessElement
   public void processElement(final ProcessContext context) {
     final EnrichedMessage originalMsg = context.element();
